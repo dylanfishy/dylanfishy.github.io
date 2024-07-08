@@ -1,251 +1,379 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AutOkey</title>
-    <style> 
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AutOkey</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
 
-*{
-    box-sizing: border-box;
-}
+    body {
+      font-family: 'Open Sans', sans-serif;
+      margin: 0;
+      background: #f1f1f1;
+      max-width: 100%;
+    }
+     
+    .flexa {
+      display: flex;
+      width: 100%;
+      height: 100%;
+      background:white; 
+      justify-content:left;
+      border-bottom: 1px solid #e4e4e4;
+    }
 
-body{
-  font-family:'Open Sans', sans-serif;
-  margin: 0;
-  background:#f1f1f1;
-}
+    .flex {
+      display: flex;
+      align-items: stretch;
+    }
 
-.flexa {
-  display: flex;
-  width: 100%;
-  background:white; 
-  justify-content:left;
-  margin-top:-10px;
-  margin-left:-10px;
-  margin-right:-30px;
-  border-bottom: 1px solid #e4e4e4;
-}
+    .imagen {
+      width: 50px;
+      height: 50px;
+      margin-top: 15px;
+    }
 
-.flex {
-   display: flex;
-   align-items: stretch;
-}
+    a {
+      color: black;
+      font-family: verdana;
+      text-decoration: none;
+    }
 
-.imagen {
-  width: 50px;
-  height: 50px;
-  margin-top: 15px;
-}
+    ol {
+      display: inline-block;
+    }
 
-a {
-  color: black;
-  font-family: verdana;
-  text-decoration:none;  
-}
+    li {
+      padding-top: 10px;
+      display: inline-block;
+      margin-left: 50px;
+      font-size: 20px;
+    }
 
-ol {
-  display:inline-block;
-}
+    .cart-icon {
+      position: relative;
+      cursor: pointer;
+      margin-left: 1370px;
+      margin-top: 25px;
+    }
 
-li {
-  padding-top:10px;
-  display:inline-block;
-  margin-left:50px;
-  font-size: 20px;
-}
+    .cart-count {
+      position: absolute;
+      top: -10px;
+      right: -10px;
+      background: red;
+      color: white;
+      border-radius: 50%;
+      padding: 2px 5px;
+      font-size: 12px;
+    }
 
-.fondogris{
-   
-  width: 100%;
-  margin-bottom: 30px;
-}
+    .cart-container {
+      display: none;
+      position: fixed;
+      top: 50px;
+      right: 10px;
+      width: 300px;
+      background: white;
+      border: 1px solid #e4e4e4;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      border-radius: 5px;
+      z-index: 1000;
+      padding: 20px;
+    }
 
-.fondogrisa{
-    background: #ffffff;
-    border-radius: 5px;
-    margin: 0 30px;
-}
+    .cart-container.active {
+      display: block;
+    }
 
-.container{
-  display:flex;
-  font-family: arial;
-  justify-content: space-between;
-  gap: 30px;
-}
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
 
-.nose{
-  background: #ffffff;
-  color: black;
-  padding: 5px;
-  text-align: center;
-  border: 1px solid black;
-  box-shadow: 5px 5px #cccccc;
-  border-radius: 5px;
-  width: 700px;
-}
+    .cart-item img {
+      width: 50px;
+      height: 50px;
+      object-fit: cover;
+      margin-right: 10px;
+    }
 
-.item{
-    width: 600px;
-    height: 400px;
-    object-fit: cover;
-    border-radius: 10px 10px 0 0;
-}
+    .cart-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+    }
 
-button{
-    background:black;
-    color: white;
-    padding:4px;
-    border-radius: 3px;
-}
+    .fondogris {
+      width: 100%;
+      margin-bottom: 30px;
+    }
 
-.h111{
-  margin-left: 30px;
-}
+    .fondogrisa {
+      background: #ffffff;
+      border-radius: 5px;
+      margin: 0 30px;
+    }
 
-.h12{
-  font-size:60px;
-  display: inline-block; 
-}
+    .container {
+      display: flex;
+      font-family: arial;
+      justify-content: space-between;
+      gap: 10px;
+    }
 
-.h23{
-  font-size:45px;
-}
+    .container > div:hover {
+      background-color: #ececec;
+    }
 
-.letra{
-  color: #ffbc0e;
-  margin-bottom: -80px;
-}
+    .nose {
+      max-width: 1000px;
+      background: #ffffff;
+      color: black;
+      padding: 5px;
+      text-align: center;
+      border: 1px solid black;
+      box-shadow: 5px 5px #cccccc;
+      border-radius: 5px;
+      width: 700px;
+    }
 
-.fondogrise{
-  background: #dadada;
-  text-align: center;
-}
+    .nose figure {
+      overflow: hidden;
+    }
 
-</style>
+    .nose:hover img {
+      transform: scale(1.2);
+    }
 
+    .item {
+      width: 500px;
+      height: 300px;
+      object-fit: cover;
+      border-radius: 10px 10px 0 0;
+      transition: all .5s;
+    }
+
+    .dylan {
+      padding: 0px 30px;
+      line-height: 2;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .dylan button {
+      border: none;
+      background: none;
+      background-color: #000;
+      color: #fff;
+      padding: 15px 10px;
+      cursor: pointer;
+    }
+
+    .h111 {
+      margin-left: 30px;
+    }
+
+    .h12 {
+      font-size: 60px;
+      display: inline-block;
+    }
+
+    .h23 {
+      font-size: 45px;
+    }
+
+    .letra {
+      color: #ffbc0e;
+      margin-bottom: -80px;
+    }
+
+    .fondogrise {
+      background: #dadada;
+      text-align: center;
+    }
+
+    .search-bar {
+      width: 100%;
+      margin: 20px 0;
+      text-align: center;
+    }
+
+    .search-bar input {
+      width: 50%;
+      padding: 10px;
+      font-size: 16px;
+    }
+
+    .cart-close {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: none;
+      border: none;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+  </style>
+</head>
 <body>
-
-
   <header class="flexa">
-    <img class= "imagen" src="https://i.postimg.cc/jWBwsVCK/89200-200.png" alt="logo"/></a>
-   <ol>
-     <li> <a href="index.html">Inicio</a> </li>
-     <li> <a href="product.html">Productos</a> </li>
-     <li> <a href="contacto.html">Contacto</a> </li>
-       </ol>
- </header>
+    <img class="imagen" src="https://i.postimg.cc/jWBwsVCK/89200-200.png" alt="logo"/>
+    <ol>
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="product.html">Productos</a></li>
+      <li><a href="contacto.html">Contacto</a></li>
+    </ol>
+    <div class="cart-icon" id="cart-icon">
+      <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7H7.312"/>
+      </svg>
+      <span class="cart-count" id="cart-count">0</span>
+    </div>
+  </header>
 
- <section class="fondogrise">
-  <br>
-  <h1 class= "letra h12"> AutO </h1> 
+  <section class="fondogrise">
+    <br>
+    <h1 class="letra h12">AutO</h1>
+    <h1 class="h12">Key</h1>
+    <h2 class="h23">Productos</h2>
+    <hr>
+  </section>
 
-  <h1 class="h12"> Key </h1>
-        <h2 class="h23">Productos</h2>
-          <hr>
-      </section>
+  <div class="search-bar">
+    <input type="text" id="search" placeholder="Buscar productos...">
+  </div>
 
-
-  <section class="fondogris"> 
-
-<h1 class="h111">Autos</h1>
-<section class="container fondogrisa">
-       <div class="nose">
-        <img class="item" src="Toyota.avif" alt="logo"/>
-        <h2> Toyota Corolla </h2>
+  <section class="fondogris">
+    <h1 class="h111">Autos</h1>
+    <section class="container fondogrisa">
+      <div class="nose">
+        <figure>
+          <img class="item" src="Toyota.avif" alt="Toyota Corolla"/>
+        </figure>
+        <div class="dylan">
+          <h2>Toyota Corolla</h2>
           <p>Un compacto de renombre mundial conocido por su fiabilidad, economía de combustible y bajo costo de mantenimiento.</p>
-        <b>$10.000.000</b>
-        <br>
-          <button>Comprar</button>
+          <b>$10.000.000</b>
+          <button onclick="addToCart('Toyota Corolla', 10000000, 'Toyota.avif')">Comprar</button>
+        </div>
       </div>
       <div class="nose">
-        <img class="item" src="mustang.jpg" alt="logo"/>
-        <h2> Ford Mustang </h2>
-          <p>Un icónico auto deportivo americano, famoso por su potente motor V8.</p>
-          <br>
-        <b>$10.000.000</b>
-        <br>
-          <button>Comprar</button>
+        <figure>
+          <img class="item" src="mustang.jpg" alt="Ford Mustang"/>
+        </figure>
+        <div class="dylan">
+          <h2>Ford Mustang</h2>
+          <p>Un icónico auto deportivo americano, famoso por su potente motor V8, diseño musculoso y su historia en la cultura del automóvil estadounidense.</p>
+          <b>$10.000.000</b>
+          <button onclick="addToCart('Ford Mustang', 10000000, 'mustang.jpg')">Comprar</button>
+        </div>
       </div>
-      
       <div class="nose">
-        <img class="item" src="bmw.jpg" alt="logo"/>
-        <h2> BMW Serie 3 </h2>
+        <figure>
+          <img class="item" src="bmw.jpg" alt="BMW Serie 3"/>
+        </figure>
+        <div class="dylan">
+          <h2>BMW Serie 3</h2>
           <p>Un sedán de lujo alemán que combina rendimiento, elegancia y tecnología avanzada.</p>
-        <b>$10.000.000</b>
-        <br>
-          <button>Comprar</button>
+          <b>$10.000.000</b>
+          <button onclick="addToCart('BMW Serie 3', 10000000, 'bmw.jpg')">Comprar</button>
+        </div>
       </div>
+    </section>
 
-</section>               
-               
-
-
-<h1 class="h111">Camionetas</h1>
-<section class="container fondogrisa">
-    <div class="nose">
-        <img class="item" src="fortd.jpg" alt="logo"/>
-        <h2> Ford F-150 </h2>
+    <h1 class="h111">Camionetas</h1>
+    <section class="container fondogrisa">
+      <div class="nose">
+        <figure>
+          <img class="item" src="fortd.jpg" alt="Ford F-150"/>
+        </figure>
+        <div class="dylan">
+          <h2>Ford F-150</h2>
           <p>Conocida por su robustez, capacidad de remolque y versatilidad para trabajos pesados.</p>
-        <b>$10.000.000</b>
-        <br>
-          <button>Comprar</button>
+          <b>$10.000.000</b>
+          <button onclick="addToCart('Ford F-150', 10000000, 'fortd.jpg')">Comprar</button>
+        </div>
       </div>
-      
       <div class="nose">
-        <img class="item" src="Chevrolet-Silverado-traccion-650x404-1-470x292.jpg" alt="logo"/>
-        <h2> Chevrolet Silverado </h2>
+        <figure>
+          <img class="item" src="Chevrolet-Silverado-traccion-650x404-1-470x292.jpg" alt="Chevrolet Silverado"/>
+        </figure>
+        <div class="dylan">
+          <h2>Chevrolet Silverado</h2>
           <p>Una camioneta robusta y confiable con una amplia gama de configuraciones y opciones de motores.</p>
-        <b>$10.000.000</b>
-        <br>
-          <button>Comprar</button>
+          <b>$10.000.000</b>
+          <button onclick="addToCart('Chevrolet Silverado', 10000000, 'Chevrolet-Silverado-traccion-650x404-1-470x292.jpg')">Comprar</button>
+        </div>
       </div>
-      
       <div class="nose">
-        <img class="item" src="toyota-hilux-2024-mild-hybrid-48-v---esterni-in-studio.jpg" alt="logo"/>
-        <h2> Toyota Hilux </h2>
-          <p>Una camioneta compacta conocida por su durabilidad y resistencia en condiciones extremas. </p>
-        <b>$10.000.000</b>
-        <br>
-          <button>Comprar</button>
+        <figure>
+          <img class="item" src="toyota-hilux-2024-mild-hybrid-48-v---esterni-in-studio.jpg" alt="Toyota Hilux"/>
+        </figure>
+        <div class="dylan">
+          <h2>Toyota Hilux</h2>
+          <p>Una camioneta compacta conocida por su durabilidad y resistencia en condiciones extremas.</p>
+          <b>$10.000.000</b>
+          <button onclick="addToCart('Toyota Hilux', 10000000, 'toyota-hilux-2024-mild-hybrid-48-v---esterni-in-studio.jpg')">Comprar</button>
+        </div>
       </div>
+    </section>
 
-</section>  
+    <h1 class="h111">Motos</h1>
+    <section class="container fondogrisa">
+      <div class="nose">
+        <figure>
+          <img class="item" src="Harley-Davidson-Sportster-Bobber-RSD.jpg" alt="Harley-Davidson"/>
+        </figure>
+        <div class="dylan">
+          <h2>Harley-Davidson</h2>
+          <p>Una moto clásica americana con un diseño icónico, conocida por su sonido distintivo y su estilo cruiser.</p>
+          <b>$10.000.000</b>
+          <button onclick="addToCart('Harley-Davidson', 10000000, 'Harley-Davidson-Sportster-Bobber-RSD.jpg')">Comprar</button>
+        </div>
+      </div>
+      <div class="nose">
+        <figure>
+          <img class="item" src="CBR600RR_2017_03.jpg" alt="Honda CBR600RR"/>
+        </figure>
+        <div class="dylan">
+          <h2>Honda CBR600RR</h2>
+          <p>Una motocicleta deportiva de alto rendimiento, famosa por su agilidad y potencia.</p>
+          <b>$10.000.000</b>
+          <button onclick="addToCart('Honda CBR600RR', 10000000, 'CBR600RR_2017_03.jpg')">Comprar</button>
+        </div>
+      </div>
+      <div class="nose">
+        <figure>
+          <img class="item" src="200226_yamaha_yzr-r1_04.jpg" alt="Yamaha YZF-R1"/>
+        </figure>
+        <div class="dylan">
+          <h2>Yamaha YZF-R1</h2>
+          <p>Una motocicleta de alto rendimiento conocida por su velocidad y tecnología avanzada.</p>
+          <b>$10.000.000</b>
+          <button onclick="addToCart('Yamaha YZF-R1', 10000000, '200226_yamaha_yzr-r1_04.jpg')">Comprar</button>
+        </div>
+      </div>
+    </section>
+  </section>
 
-
-
-
-
-
-<h1 class="h111">Motos</h1>
-<section class="container fondogrisa">
-  <div class="nose">
-    <img class="item" src="Harley-Davidson-Sportster-Bobber-RSD.jpg" alt="logo"/>
-    <h2> Harley-Davidson</h2>
-      <p>Una moto clásica americana con un diseño icónico, conocida por su sonido distintivo y su estilo cruiser. </b>
-    <br>
-      <button>Comprar</button>
+  <div class="cart-container" id="cart-container">
+    <button class="cart-close" id="cart-close">&times;</button>
+    <h3>Carrito de Compras</h3>
+    <div id="cart-items"></div>
+    <div class="cart-total">Total: $<span id="cart-total">0</span></div>
+    <div class="cart-buttons">
+      <button onclick="clearCart()">Vaciar Carrito</button>
+      <button onclick="checkout()">Comprar</button>
+    </div>
   </div>
-  
-  <div class="nose">
-    <img class="item" src="CBR600RR_2017_03.jpg" alt="logo"/>
-    <h2> Honda CBR600RR </h2>
-      <p>Una motocicleta deportiva de alto rendimiento, famosa por su agilidad y potencia. </p>
-    <b>$10.000.000</b>
-    <br>
-      <button>Comprar</button>
-  </div>
-  
-  <div class="nose">
-    <img class="item" src="200226_yamaha_yzr-r1_04.jpg" alt="logo"/>
-    <h2> Yamaha YZF-R1 </h2>
-      <p>Una motocicleta de alto rendimiento conocida por su velocidad y tecnología avanzada. </p>
-    <b>$10.000.000</b>
-    <br>
-      <button>Comprar</button>
-  </div>
-  
-</section>  
 
-</section>
+  <script src="index.js"></script>
 </body>
+</html>
